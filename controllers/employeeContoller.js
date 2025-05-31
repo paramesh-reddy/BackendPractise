@@ -18,4 +18,26 @@ const createEmployee = async (req, res) => {
   }
 };
 
-module.exports = { createEmployee };
+const getEmployee = async (req, res) => {
+  try {
+    const employees = await Employee.find();
+    res.status(200).json(employees);
+  } catch (error) {
+    console.log("there is an error", error);
+    res.status(500).json({ message: "server error" });
+  }
+};
+
+const singleEmployee = async (req, res) => {
+  try {
+    const employee = await Employee.findById(req.params.id);
+    if (!employee) {
+      return res.status(404).json({ message: "employee are not found" });
+    }
+    res.status(200).json(employee);
+  } catch (error) {
+    console.log("there is an error", error);
+    res.status(500).json({ message: "server error" });
+  }
+};
+module.exports = { createEmployee, getEmployee, singleEmployee };
