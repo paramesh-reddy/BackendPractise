@@ -6,7 +6,9 @@ const employeeRoute = require("./routes/employeeRoutes");
 const bodyParser = require("body-parser");
 
 dotEnv.config();
-app.use(bodyParser.json);
+
+app.use(bodyParser.json());
+
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
@@ -16,7 +18,7 @@ mongoose
     console.log(`${error}`);
   });
 
-app.use("/employee", employeeRoute);
+app.use("/employees", employeeRoute);
 const PORT = process.env.PORT || 4500;
 
 console.log(process.env);
