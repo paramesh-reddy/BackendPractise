@@ -4,11 +4,11 @@ const dotEnv = require("dotenv");
 const app = express();
 const employeeRoute = require("./routes/employeeRoutes");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 dotEnv.config();
+app.use(cors());
 
 app.use(bodyParser.json());
-
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {
